@@ -16,11 +16,11 @@ spec:
         name: k8s-at-home-charts
         namespace: flux-system
       interval: 5m
-    values:
-      resources:
-        requests:
-          memory: 250Mi
-          cpu: 500m
-        limits:
-          memory: 1500Mi
-          cpu: 2000m
+  values:
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 500m
+      limits:
+        memory: 1500Mi
+        cpu: 2000m
