@@ -1,0 +1,21 @@
+---
+version: '3'
+
+env:
+  ANSIBLE_CONFIG: "{{.PROJECT_DIR}}/infra/ansible/ansible.cfg"
+
+vars:
+  ANSIBLE_PLAYBOOK_DIR: "{{.ANSIBLE_DIR}}/playbooks"
+  ANSIBLE_INVENTORY_DIR: "{{.ANSIBLE_DIR}}/inventory"
+  ANSIBLE_GROUPS: "control_nodes:generic_nodes"
+
+tasks:
+  install:
+    desc: Setup k3s infrastructure
+    cmds:
+    - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/lan/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s/install.yml"
+
+  storage:
+    desc: Configure cluster storage
+    cmds:
+    - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/lan/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/k3s/install.yml --tags storage"

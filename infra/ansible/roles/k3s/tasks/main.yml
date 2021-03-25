@@ -19,3 +19,10 @@
   - calico.enabled
   tags:
   - calico
+
+- include: storage.yml
+  when:
+  - longhorn.enabled is defined
+  - longhorn.enabled
+  tags:
+  - storage

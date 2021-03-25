@@ -12,6 +12,7 @@ env:
 
 includes:
   ansible: .taskfiles/ansible.yml
+  infra:   .taskfiles/infra.yml
   secrets: .taskfiles/secrets.yml
 
 tasks:

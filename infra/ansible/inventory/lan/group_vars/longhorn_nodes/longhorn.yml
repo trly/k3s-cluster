@@ -1,0 +1,4 @@
+longhorn:
+  enabled: true
+  lvm_pvs:
+  - /dev/vdb

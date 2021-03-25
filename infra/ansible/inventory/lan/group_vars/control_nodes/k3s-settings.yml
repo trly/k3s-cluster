@@ -11,6 +11,7 @@ k3s_server:
   node-ip: "{{ ansible_host }}"
   docker: false
   flannel-backend: 'none'
+  node-taint: 'CriticalAddonsOnly=true:NoExecute'
   disable:
   - flannel
   - traefik

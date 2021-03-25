@@ -1,0 +1,3 @@
+k3s_agent:
+  node-label:
+    - "node.longhorn.io/create-default-disk=config"

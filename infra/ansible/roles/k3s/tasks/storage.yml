@@ -1,0 +1,38 @@
+- name: cluster | storage | install longhorn requirements
+  ansible.builtin.apt:
+    name:
+    - open-iscsi
+    - curl
+    - lvm2
+    - parted
+
+- name: cluster | storage | create longhorn volume group
+  community.general.lvg:
+    pvs: "{{ longhorn.lvm_pvs }}"
+    pvresize: true
+    state: present
+    vg: vg_longhorn
+
+- name: cluster | storage | create longhorn logical volume
+  community.general.lvol:
+    active: true
+    lv: lv_data
+    shrink: false
+    size: 100%FREE
+    state: present
+    vg: vg_longhorn
+
+- name: cluster | storage | create longhorn filesystem
+  community.general.filesystem:
+    fstype: ext4
+    dev: /dev/mapper/vg_longhorn-lv_data
+    resizefs: true
+    state: present
+
+- name: cluster | storage | mount longhorn partition
+  ansible.posix.mount:
+    fstype: ext4
+    path: /var/lib/longhorn
+    opts: defaults,noatime
+    src: /dev/mapper/vg_longhorn-lv_data
+    state: mounted
